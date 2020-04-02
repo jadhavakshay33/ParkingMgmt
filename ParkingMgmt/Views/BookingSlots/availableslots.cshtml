@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ParkingSlotDataLib.BookingSlot>
+
+@{
+    ViewBag.Title = "availableslots";
+}
+
+<h2>availableslots</h2>
+<table class="table">
+
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllocatedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VehicleType)
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.VehicleType == "Small")
+            {
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleNumber)
+                    @Html.DisplayFor(modelItem => item.AllocatedTime)
+                    @Html.DisplayFor(modelItem => item.VehicleType)
+                </td>
+            }
+
+
+        }
+    </table>

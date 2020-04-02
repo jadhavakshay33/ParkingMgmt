@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ParkingSlotDataLib;
+using ParkingMgmt.Models;
 
 namespace ParkingMgmt.Controllers
 {
@@ -17,9 +18,23 @@ namespace ParkingMgmt.Controllers
         // GET: BookingSlots
         public ActionResult Index()
         {
+           
             return View(db.BookingSlots.ToList());
         }
 
+        public ActionResult availableslots(string VehicleType)
+        {
+            string VT = VehicleType;
+            return View(db.BookingSlots.ToList());
+            // return View(db.BookingSlots.Where(m => m.VehicleType == VT).ToList());
+        }
+
+        public ActionResult SlotAvaiabilty()
+        {
+            ParkingSlotEntities db = new ParkingSlotEntities();
+            ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
+            return View(db.BookingSlots.ToList());
+        }
         // GET: BookingSlots/Details/5
         public ActionResult Details(int? id)
         {
