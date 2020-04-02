@@ -26,5 +26,7 @@ namespace ParkingSlotDataLib
         }
     
         public virtual DbSet<BookingSlot> BookingSlots { get; set; }
+
+        //public System.Data.Entity.DbSet<ParkingMgmt.Models.BookingSlotModel> BookingSlotModels { get; set; }
     }
 }
