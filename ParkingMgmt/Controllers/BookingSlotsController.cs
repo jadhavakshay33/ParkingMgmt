@@ -18,13 +18,17 @@ namespace ParkingMgmt.Controllers
         // GET: BookingSlots
         public ActionResult Index()
         {
-           
+
             return View(db.BookingSlots.ToList());
         }
-
-        public ActionResult availableslots(string VehicleType)
+        [HttpPost]
+        public ActionResult availableslots(BookingSlot bs)
         {
-            string VT = VehicleType;
+
+            string VT = bs.VehicleType;
+            
+                Console.WriteLine(VT);
+     
             return View(db.BookingSlots.ToList());
             // return View(db.BookingSlots.Where(m => m.VehicleType == VT).ToList());
         }

@@ -1,26 +1,14 @@
 ﻿@model IEnumerable<ParkingSlotDataLib.BookingSlot>
 @{
+    /**/
+
     ViewBag.Title = "SlotAvaiabilty";
 }
-<script>
-   
-    function GetSelectedType(sel) {
-        debugger; 
-        var result = sel.options[sel.selectedIndex].text;
+@using (Html.BeginForm("availableslots", "BookingSlots",FormMethod.Post))
+{
+<h1>@Html.DropDownList("Select Vehicle Type", new SelectList(ViewBag.DropDown), "Select VehicleType", null)</h1>
+    
 
-        $.get("/BookingSlots/availableslots", new { VehicleType: result});
-    }
-</script>
-
-<h2>SlotAvaiabilty</h2>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<select onchange="GetSelectedType(this);">
-    <option id="VType">Select Vehicle Type</option>
-    @foreach (var item in ViewBag.DropDown)
-    {
-        <option>@item</option>
-    }
-</select>
+    <input type="submit" value="Check Slot Avaiability"  class="btn btn-default" />
+}
 @*<button onclick="GetSelectedType()">Check Slot Avaiability</button>*@
