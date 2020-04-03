@@ -4,9 +4,9 @@
 
     ViewBag.Title = "SlotAvaiabilty";
 }
-@using (Html.BeginForm("availableslots", "BookingSlots",FormMethod.Post))
+@using (Html.BeginForm("availableslots", "BookingSlots",FormMethod.Get))
 {
-<h1>@Html.DropDownList("Select Vehicle Type", new SelectList(ViewBag.DropDown), "Select VehicleType", null)</h1>
+<h1>@Html.DropDownList("VehicleType", new SelectList(ViewBag.DropDown), "Select VehicleType", null)</h1>
     
 
     <input type="submit" value="Check Slot Avaiability"  class="btn btn-default" />

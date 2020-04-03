@@ -21,15 +21,30 @@ namespace ParkingMgmt.Controllers
 
             return View(db.BookingSlots.ToList());
         }
-        [HttpPost]
-        public ActionResult availableslots(BookingSlot bs)
+        [HttpGet]
+        public ActionResult availableslots()
         {
 
-            string VT = bs.VehicleType;
-            
-                Console.WriteLine(VT);
+            string VT = Request.QueryString["VehicleType"]; ;
+            if(VT==""||VT==null)
+            {
+                
+            }
+            else if(VT=="Large")
+            {
+                return View(db.BookingSlots.Where(m => m.VehicleType == VT && m.VehicleNumber == null|| m.VehicleNumber == ""));
+            }
+            else if(VT=="medium")
+            {
+                return View()
+            }
+            else
+            {
+                return View(db.BookingSlots.ToList());
+            }
+           
      
-            return View(db.BookingSlots.ToList());
+            return View();
             // return View(db.BookingSlots.Where(m => m.VehicleType == VT).ToList());
         }
 
