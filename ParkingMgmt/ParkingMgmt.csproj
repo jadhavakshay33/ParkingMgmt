@@ -172,8 +172,8 @@
     <Content Include="Views\BookingSlots\Details.cshtml" />
     <Content Include="Views\BookingSlots\Edit.cshtml" />
     <Content Include="Views\BookingSlots\Index.cshtml" />
-    <Content Include="Views\BookingSlots\availableslots.cshtml" />
     <Content Include="Views\BookingSlots\SlotAvaiabilty.cshtml" />
+    <Content Include="Views\BookingSlots\availableslots.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -26,26 +26,28 @@ namespace ParkingMgmt.Controllers
         {
 
             string VT = Request.QueryString["VehicleType"]; ;
-            if(VT==""||VT==null)
+            if(VT==null)
             {
-                
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else if(VT=="Large")
             {
-                return View(db.BookingSlots.Where(m => m.VehicleType == VT && m.VehicleNumber == null|| m.VehicleNumber == ""));
+          
+             //var mm = db.BookingSlots.Where(x => x.VehicleType == VT && x.VehicleNumber==null).ToList();
+             return View(db.BookingSlots.Where(x => x.VehicleType == VT && x.VehicleNumber == null).ToList());
             }
-            else if(VT=="medium")
+            else if(VT=="Medium")
             {
-                return View()
+                return View(db.BookingSlots.Where(x => x.VehicleType == VT ||x.VehicleType=="Large"&& x.VehicleNumber == null).ToList());
             }
             else
             {
-                return View(db.BookingSlots.ToList());
+                return View(db.BookingSlots.Where(x=>x.VehicleNumber==null).ToList());
             }
            
      
             return View();
-            // return View(db.BookingSlots.Where(m => m.VehicleType == VT).ToList());
+         
         }
 
         public ActionResult SlotAvaiabilty()
