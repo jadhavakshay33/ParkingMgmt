@@ -4,29 +4,65 @@
     ViewBag.Title = "availableslots";
 }
 
-<style>
-    table, th, td {
-        border: 1px solid black;
-    }
-</style>
-
 <h2>availableslots</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-@foreach (var item in Model) {
-    <tr>
-            @Html.DisplayFor(modelItem => item.Id)
+<style>
+    body {
+        margin: 4rem 0;
+    }
+
+    h4 {
+        margin-bottom: 2rem;
+        margin-top: 3rem;
+    }
+
+    .panel {
+        height:auto;
+        width:auto;
+        border-radius: 0.2rem;
+        padding: 1rem;
+        margin-bottom: 0.2rem;
+    }
+
+        .panel.panel-purple {
+            border: 1px solid #7f51f4;
+            background-color: #dfccff;
+            color: #7f51f4;
+        }
+</style>
+
+
+<div class="container">
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-2">
+                <div class="panel panel-purple">
+                    <h4>
+                        <b>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </b>
+                    </h4>
+                      @Html.DisplayFor(modelItem => item.VehicleType)
+                </div>
+            </div>
+        }
+        </div>
     
-            @Html.DisplayFor(modelItem => item.VehicleNumber)
-     
-            @Html.DisplayFor(modelItem => item.AllocatedDate)
-       
-            @Html.DisplayFor(modelItem => item.AllocatedTime)
-   
-            @Html.DisplayFor(modelItem => item.VehicleType)
-    </tr>
-}
-</table>
+    </div>
+
+@*@foreach (var item in Model) {
+
+                @Html.DisplayFor(modelItem => item.Id)
+
+                @Html.DisplayFor(modelItem => item.VehicleNumber)
+
+                @Html.DisplayFor(modelItem => item.AllocatedDate)
+
+                @Html.DisplayFor(modelItem => item.AllocatedTime)
+
+                @Html.DisplayFor(modelItem => item.VehicleType)
+
+    }*@
+
