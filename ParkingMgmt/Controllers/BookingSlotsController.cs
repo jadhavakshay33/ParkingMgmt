@@ -16,46 +16,129 @@ namespace ParkingMgmt.Controllers
         private ParkingSlotEntities db = new ParkingSlotEntities();
 
         // GET: BookingSlots
-        public ActionResult Index()
+        public ActionResult AllSlots()
         {
-
             return View(db.BookingSlots.ToList());
         }
+
+        public ActionResult SlotAvaiabilty()
+        {
+            // ParkingSlotEntities db = new ParkingSlotEntities();
+            ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
+            return View();
+        }
+
         [HttpGet]
         public ActionResult availableslots()
         {
 
             string VT = Request.QueryString["VehicleType"]; ;
-            if(VT==null)
+            if (VT =="")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.error = "Please select Vehicle Type";
+                return View("");
             }
-            else if(VT=="Large")
+            else if (VT == "Large")
             {
-          
-             //var mm = db.BookingSlots.Where(x => x.VehicleType == VT && x.VehicleNumber==null).ToList();
-             return View(db.BookingSlots.Where(x => x.VehicleType == VT && x.VehicleNumber == null).ToList());
+                var count = db.BookingSlots.Where(x => x.VehicleType == VT && x.VehicleNumber == null).ToList().Count();
+                if (count == 0)
+                {
+                    ViewBag.error = "Parking Slots Not Avilable";
+                }
+                else
+                {
+                    return View(db.BookingSlots.Where(x => x.VehicleType == VT && x.VehicleNumber == null).ToList());
+                }
+             
             }
             else if(VT=="Medium")
             {
-                return View(db.BookingSlots.Where(x => x.VehicleType == VT ||x.VehicleType=="Large"&& x.VehicleNumber == null).ToList());
+                var count = db.BookingSlots.Where(x => x.VehicleType == VT || x.VehicleType == "Large" && x.VehicleNumber == null).ToList().Count();
+                if(count==0)
+                {
+                    ViewBag.error = "Parking Slots Not Avilable";
+                }
+                else
+                {
+                    return View(db.BookingSlots.Where(x => x.VehicleType == VT || x.VehicleType == "Large" && x.VehicleNumber == null).ToList());
+                }
+                
+            }
+            else if(VT == "Small")
+            {
+                var count = db.BookingSlots.Where(x => x.VehicleNumber == null).ToList().Count();
+                if(count==0)
+                {
+                    ViewBag.error = "Parking Slots Not Avilable";
+                }
+                else
+                {
+                    return View(db.BookingSlots.Where(x => x.VehicleNumber == null).ToList());
+                }
+                
+            }
+
+            return View(ViewBag.error);
+         
+        }
+        public ActionResult BookSlot()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult BookSlot([Bind(Include = "VehicleNumber,AllocatedDate,AllocatedTime,VehicleType")] BookingSlot bs)
+        {
+            if(bs.VehicleType!=null&&bs.VehicleNumber!=null)
+            {
+
+                if (bs.VehicleType == "Large")
+                {
+
+                    var count = db.BookingSlots.Where(x => x.VehicleType == "Large" && x.VehicleNumber == null).ToList().Count();
+                    if (count != 0)
+                    {
+                        var EditedObj = db
+                              .BookingSlots
+                              .Where(x => x.VehicleType == "Large" && x.VehicleNumber == null)
+                              .First();
+
+                        EditedObj.VehicleNumber = bs.VehicleNumber;
+                        EditedObj.AllocatedDate = DateTime.Now;
+                        EditedObj.AllocatedTime = DateTime.Now.TimeOfDay;
+                        db.SaveChanges();
+                    }
+                }
+                else if (bs.VehicleType == "Medium")
+                {
+                    var EditedObj = db
+                             .BookingSlots
+                             .Where(x => x.VehicleType == "Medium" || x.VehicleType == "Medium" && x.VehicleNumber == null)
+                             .First();
+                    EditedObj.VehicleNumber = bs.VehicleNumber;
+                    EditedObj.AllocatedDate = DateTime.Now;
+                    EditedObj.AllocatedTime = DateTime.Now.TimeOfDay;
+                    db.SaveChanges();
+                }
+                else if (bs.VehicleType == "Small")
+                {
+                    var EditedObj = db
+                             .BookingSlots
+                             .Where(x => x.VehicleNumber == null)
+                             .First();
+                    EditedObj.VehicleNumber = bs.VehicleNumber;
+                    EditedObj.AllocatedDate = DateTime.Now;
+                    EditedObj.AllocatedTime = DateTime.Now.TimeOfDay;
+                    db.SaveChanges();
+                }
+
             }
             else
             {
-                return View(db.BookingSlots.Where(x=>x.VehicleNumber==null).ToList());
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           
-     
             return View();
-         
         }
 
-        public ActionResult SlotAvaiabilty()
-        {
-            ParkingSlotEntities db = new ParkingSlotEntities();
-            ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
-            return View(db.BookingSlots.ToList());
-        }
         // GET: BookingSlots/Details/5
         public ActionResult Details(int? id)
         {
@@ -93,6 +176,19 @@ namespace ParkingMgmt.Controllers
 
             return View(bookingSlot);
         }
+
+
+
+
+
+
+        /// <summary>
+        /// //////////////
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+
 
         // GET: BookingSlots/Edit/5
         public ActionResult Edit(int? id)

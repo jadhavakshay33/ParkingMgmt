@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<ParkingSlotDataLib.BookingSlot>
 
-@{
-    ViewBag.Title = "availableslots";
-}
 
 <h2>Avialable Slots</h2>
 
@@ -20,15 +17,16 @@
         height: auto;
         width: auto;
         border-radius: 0.2rem;
-        padding: 1rem;
-        margin-bottom: 0.2rem;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        
     }
 
         .panel.panel-purple {
-            border: 1px solid #7f51f4;
+            border: 2px solid #7f51f4;
             background-color: #dfccff;
             color: #7f51f4;
-            text-align: center;
+            text-align:center;
         }
 </style>
 
@@ -42,30 +40,14 @@
         {
             <div class="col-md-2">
                 <div class="panel panel-purple">
-                    <h4>
-                        <b>
-                            @Html.DisplayFor(modelItem => item.SlotNo)
-                        </b>
-                    </h4>
+                    <h4> @Html.DisplayFor(modelItem => item.SlotNo)</h4>
                     @Html.DisplayFor(modelItem => item.VehicleType)
+                    <h6> @Html.DisplayFor(modelItem => item.VehicleNumber)</h6>
+
                 </div>
             </div>
         }
     </div>
 
 </div>
-
-@*@foreach (var item in Model) {
-
-                @Html.DisplayFor(modelItem => item.Id)
-
-                @Html.DisplayFor(modelItem => item.VehicleNumber)
-
-                @Html.DisplayFor(modelItem => item.AllocatedDate)
-
-                @Html.DisplayFor(modelItem => item.AllocatedTime)
-
-                @Html.DisplayFor(modelItem => item.VehicleType)
-}*@
-
 
