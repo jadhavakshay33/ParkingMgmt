@@ -19,5 +19,6 @@ namespace ParkingSlotDataLib
         public Nullable<System.DateTime> AllocatedDate { get; set; }
         public Nullable<System.TimeSpan> AllocatedTime { get; set; }
         public string VehicleType { get; set; }
+        public Nullable<int> SlotNo { get; set; }
     }
 }
