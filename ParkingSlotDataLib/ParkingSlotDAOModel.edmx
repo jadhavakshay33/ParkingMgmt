@@ -16,8 +16,21 @@
           <Property Name="VehicleType" Type="nvarchar" MaxLength="20" />
           <Property Name="SlotNo" Type="int" />
         </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AllocatedDate" Type="date" Nullable="false" />
+          <Property Name="AllocatedTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="UnAllocatedDate" Type="date" Nullable="false" />
+          <Property Name="UnAllocatedTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="SlotNo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="ParkingSlotModelStoreContainer">
           <EntitySet Name="BookingSlot" EntityType="Self.BookingSlot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -36,7 +49,20 @@
         </EntityType>
         <EntityContainer Name="ParkingSlotEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BookingSlots" EntityType="Self.BookingSlot" />
+          <EntitySet Name="Histories" EntityType="ParkingSlotModel.History" />
         </EntityContainer>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AllocatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AllocatedTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="UnAllocatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UnAllocatedTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="SlotNo" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -52,6 +78,19 @@
                 <ScalarProperty Name="AllocatedDate" ColumnName="AllocatedDate" />
                 <ScalarProperty Name="AllocatedTime" ColumnName="AllocatedTime" />
                 <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Histories">
+            <EntityTypeMapping TypeName="ParkingSlotModel.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="SlotNo" ColumnName="SlotNo" />
+                <ScalarProperty Name="UnAllocatedTime" ColumnName="UnAllocatedTime" />
+                <ScalarProperty Name="UnAllocatedDate" ColumnName="UnAllocatedDate" />
+                <ScalarProperty Name="AllocatedTime" ColumnName="AllocatedTime" />
+                <ScalarProperty Name="AllocatedDate" ColumnName="AllocatedDate" />
+                <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

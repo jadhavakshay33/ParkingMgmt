@@ -14,12 +14,13 @@ namespace ParkingMgmt.Controllers
     public class BookingSlotsController : Controller
     {
         private ParkingSlotEntities db = new ParkingSlotEntities();
-
+        private History his= new History();
         // GET: BookingSlots
         public ActionResult AllSlots()
-        {
+        { 
             return View(db.BookingSlots.ToList());
         }
+
 
         public ActionResult SlotAvaiabilty()
         {
@@ -78,7 +79,7 @@ namespace ParkingMgmt.Controllers
                 
             }
 
-            return View(ViewBag.error);
+            return View();
          
         }
         public ActionResult BookSlot()
@@ -139,6 +140,12 @@ namespace ParkingMgmt.Controllers
             return View();
         }
 
+        public ActionResult UnallocateParkingSlot()
+        {
+            return View(db.BookingSlots.Where(x=>x.VehicleNumber!=null).ToList());
+        }
+
+
         // GET: BookingSlots/Details/5
         public ActionResult Details(int? id)
         {
@@ -169,6 +176,7 @@ namespace ParkingMgmt.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.BookingSlots.Add(bookingSlot);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -242,9 +250,21 @@ namespace ParkingMgmt.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             BookingSlot bookingSlot = db.BookingSlots.Find(id);
-            db.BookingSlots.Remove(bookingSlot);
+            his.AllocatedDate = bookingSlot.AllocatedDate.Value;
+            his.AllocatedTime = bookingSlot.AllocatedTime.Value;
+            his.VehicleNo = bookingSlot.VehicleNumber;
+            his.SlotNo = bookingSlot.SlotNo.Value;
+            his.UnAllocatedDate = DateTime.Now;
+            his.UnAllocatedTime = DateTime.Now.TimeOfDay;
+          
+            bookingSlot.VehicleNumber = null;
+            bookingSlot.AllocatedDate = null;
+            bookingSlot.AllocatedTime = null;
+
+            db.History.Add(his);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("AllSlots");
+          
         }
 
         protected override void Dispose(bool disposing)

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ParkingSlotDataLib.BookingSlot>
+
+@{
+    ViewBag.Title = "UnallocateParkingSlot";
+}
+
+<h2>UnallocateParkingSlot</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllocatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllocatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlotNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllocatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllocatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlotNo)
+        </td>
+        <td>
+            @Html.ActionLink("UnAllocate Parking Slots", "Delete", new { id=item.Id})
+        </td>
+    </tr>
+}
+
+</table>

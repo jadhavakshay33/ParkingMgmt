@@ -53,6 +53,9 @@
     <Compile Include="BookingSlot.cs">
       <DependentUpon>ParkingSlotDAOModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="History.cs">
+      <DependentUpon>ParkingSlotDAOModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ParkingSlotDAOModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -26,5 +26,6 @@ namespace ParkingSlotDataLib
         }
     
         public virtual DbSet<BookingSlot> BookingSlots { get; set; }
+        public virtual DbSet<History> History { get; set; }
     }
 }
