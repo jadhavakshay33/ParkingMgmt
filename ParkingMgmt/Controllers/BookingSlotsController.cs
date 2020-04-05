@@ -97,6 +97,7 @@ namespace ParkingMgmt.Controllers
         }
         public ActionResult BookSlot()
         {
+            ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
             return View();
         }
         [HttpPost]
