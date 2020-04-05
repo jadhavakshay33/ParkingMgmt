@@ -15,7 +15,14 @@ namespace ParkingMgmt.Controllers
     {
         private ParkingSlotEntities db = new ParkingSlotEntities();
         private History his= new History();
-        // GET: BookingSlots
+  
+
+
+        public ActionResult HomePage()
+        {
+            return View();
+        }
+
         public ActionResult AllSlots()
         { 
             return View(db.BookingSlots.ToList());
@@ -27,6 +34,13 @@ namespace ParkingMgmt.Controllers
             // ParkingSlotEntities db = new ParkingSlotEntities();
             ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
             return View();
+        }
+
+        public ActionResult ParkingHistory()
+        {
+
+            return View(db.History.OrderByDescending(x=>x.AllocatedDate)
+                .ToList());
         }
 
         [HttpGet]
@@ -144,61 +158,6 @@ namespace ParkingMgmt.Controllers
         {
             return View(db.BookingSlots.Where(x=>x.VehicleNumber!=null).ToList());
         }
-
-
-        // GET: BookingSlots/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BookingSlot bookingSlot = db.BookingSlots.Find(id);
-            if (bookingSlot == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bookingSlot);
-        }
-
-        // GET: BookingSlots/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: BookingSlots/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VehicleNumber,AllocatedDate,AllocatedTime,VehicleType")] BookingSlot bookingSlot)
-        {
-            if (ModelState.IsValid)
-            {
-                
-                db.BookingSlots.Add(bookingSlot);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(bookingSlot);
-        }
-
-
-
-
-
-
-        /// <summary>
-        /// //////////////
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
-
-
-        // GET: BookingSlots/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -213,23 +172,6 @@ namespace ParkingMgmt.Controllers
             return View(bookingSlot);
         }
 
-        // POST: BookingSlots/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VehicleNumber,AllocatedDate,AllocatedTime,VehicleType")] BookingSlot bookingSlot)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(bookingSlot).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(bookingSlot);
-        }
-
-        // GET: BookingSlots/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)

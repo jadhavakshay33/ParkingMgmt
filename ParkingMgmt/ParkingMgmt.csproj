@@ -167,14 +167,14 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\BookingSlots\Create.cshtml" />
     <Content Include="Views\BookingSlots\Delete.cshtml" />
-    <Content Include="Views\BookingSlots\Details.cshtml" />
     <Content Include="Views\BookingSlots\Edit.cshtml" />
     <Content Include="Views\BookingSlots\SlotAvaiabilty.cshtml" />
     <Content Include="Views\BookingSlots\availableslots.cshtml" />
     <Content Include="Views\BookingSlots\BookSlot.cshtml" />
     <Content Include="Views\BookingSlots\AllSlots.cshtml" />
+    <Content Include="Views\BookingSlots\HomePage.cshtml" />
+    <Content Include="Views\BookingSlots\ParkingHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

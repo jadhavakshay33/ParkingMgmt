@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ParkingSlotDataLib.History>
+
+@{
+    ViewBag.Title = "ParkingHistory";
+}
+
+<h2>ParkingHistory</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllocatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllocatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnAllocatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnAllocatedTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SlotNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllocatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AllocatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnAllocatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnAllocatedTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SlotNo)
+        </td>
+    </tr>
+}
+
+</table>
