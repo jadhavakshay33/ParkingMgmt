@@ -4,11 +4,7 @@
     ViewBag.Title = "UnallocateParkingSlot";
 }
 
-<h2>UnallocateParkingSlot</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Select Vehicle To Unallocate</h2>
 <table class="table">
     <tr>
         <th>
@@ -47,7 +43,7 @@
             @Html.DisplayFor(modelItem => item.SlotNo)
         </td>
         <td>
-            @Html.ActionLink("UnAllocate Parking Slots", "Delete", new { id=item.Id})
+            @Html.ActionLink("Select Vehicle", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

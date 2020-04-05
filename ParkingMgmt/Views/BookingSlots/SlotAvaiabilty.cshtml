@@ -1,15 +1,23 @@
 ﻿@model IEnumerable<ParkingSlotDataLib.BookingSlot>
 @{
-    /**/
 
     ViewBag.Title = "SlotAvaiabilty";
 }
-@using (Html.BeginForm("availableslots", "BookingSlots", FormMethod.Get))
-{
+
+
+<div>
+    <br />
+    <br />
+    <br />
+    @using (Html.BeginForm("availableslots", "BookingSlots", FormMethod.Get))
+    {
 
         <h3>@Html.DropDownList("VehicleType", new SelectList(ViewBag.DropDown), "Select Vehicle Type", null)</h3>
-        <input type="submit" value="Check Slot Avaiability" class="btn btn-success" />
+        <input type="submit" value="Check Slot Avaiability" class="btn btn-success btn-lg btn-block" />
 
         <div>@ViewBag.error</div>
 
-}   @*<button onclick="GetSelectedType()">Check Slot Avaiability</button>*@
+    }   @*<button onclick="GetSelectedType()">Check Slot Avaiability</button>*@
+
+</div>
+

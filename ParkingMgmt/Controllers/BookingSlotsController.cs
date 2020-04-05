@@ -39,8 +39,7 @@ namespace ParkingMgmt.Controllers
         public ActionResult ParkingHistory()
         {
 
-            return View(db.History.OrderByDescending(x=>x.AllocatedDate)
-                .ToList());
+            return View(db.History.OrderByDescending(x=>x.AllocatedDate).ToList());
         }
 
         [HttpGet]
@@ -154,10 +153,7 @@ namespace ParkingMgmt.Controllers
             return RedirectToAction("HomePage");
         }
 
-        public ActionResult UnallocateParkingSlot()
-        {
-            return View(db.BookingSlots.Where(x=>x.VehicleNumber!=null).ToList());
-        }
+   
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -170,6 +166,11 @@ namespace ParkingMgmt.Controllers
                 return HttpNotFound();
             }
             return View(bookingSlot);
+        }
+
+        public ActionResult UnallocateParkingSlot()
+        {
+            return View(db.BookingSlots.Where(x => x.VehicleNumber != null).ToList());
         }
 
         public ActionResult Delete(int? id)
@@ -203,7 +204,7 @@ namespace ParkingMgmt.Controllers
             bookingSlot.AllocatedTime = null;
             db.History.Add(his);
             db.SaveChanges();
-            return RedirectToAction("AllSlots");
+            return RedirectToAction("UnallocateParkingSlot");
 
         }
 

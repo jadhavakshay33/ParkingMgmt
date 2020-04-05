@@ -29,27 +29,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AllocatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AllocatedTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnAllocatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnAllocatedTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SlotNo)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VehicleNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllocatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllocatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnAllocatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnAllocatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlotNo)
+            </td>
+        </tr>
+    }
+    
 
 </table>
+<input type="button" value="HomePage" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("HomePage", "BookingSlots")'" />

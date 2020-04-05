@@ -8,7 +8,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>BookingSlot</h4>
+        <h4>Book New Slot</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Book Slot" class="btn btn-default" />
+                <input type="submit" value="Book Slot" class="btn btn-primary btn-lg btn-block" />
             </div>
         </div>
     </div>

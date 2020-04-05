@@ -39,9 +39,9 @@
         {
             <div class="col-md-2">
                 <div class="panel panel-purple">
-                    <h4> @Html.DisplayFor(modelItem => item.SlotNo)</h4>
-                    @Html.DisplayFor(modelItem => item.VehicleType)
-                    <h6> @Html.DisplayFor(modelItem => item.VehicleNumber)</h6>
+                    <div> @Html.DisplayFor(modelItem => item.SlotNo)</div>
+                    <div> @Html.DisplayFor(modelItem => item.VehicleType)</div>
+                    <div><h6> @Html.DisplayFor(modelItem => item.VehicleNumber)</h6></div>
 
                 </div>
             </div>
@@ -49,4 +49,5 @@
     </div>
 
 </div>
+<input type="button" value="HomePage" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("HomePage", "BookingSlots")'" />
 

@@ -41,8 +41,8 @@
         @Html.AntiForgeryToken()
 
     <div class="form-actions no-color">
-        @Html.ActionLink("Back To UnAllocate Slots List", "UnallocateParkingSlot")
-        <input type="submit" value="Confirm" class="btn btn-danger" style="background-size:100px" />
+        <input type="button" value="Back" class="btn btn-primary btn-lg btn-block" onclick="location.href='@Url.Action("UnallocateParkingSlot", "BookingSlots")'" />
+        <input type="submit" value="Confirm" class="btn btn-danger btn-lg btn-block" style="background-size:100px" />
     </div>
     }
 </div>
