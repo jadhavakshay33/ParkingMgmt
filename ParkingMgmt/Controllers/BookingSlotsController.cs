@@ -47,11 +47,11 @@ namespace ParkingMgmt.Controllers
         public ActionResult availableslots()
         {
 
-            string VT = Request.QueryString["VehicleType"]; ;
-            if (VT =="")
+            string VT = Request.QueryString["VehicleType"];
+            if (VT =="" || VT==null)
             {
                 ViewBag.error = "Please select Vehicle Type";
-                return View("");
+                return RedirectToAction("SlotAvaiabilty");
             }
             else if (VT == "Large")
             {
@@ -151,7 +151,7 @@ namespace ParkingMgmt.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            return View();
+            return RedirectToAction("HomePage");
         }
 
         public ActionResult UnallocateParkingSlot()
@@ -198,15 +198,13 @@ namespace ParkingMgmt.Controllers
             his.SlotNo = bookingSlot.SlotNo.Value;
             his.UnAllocatedDate = DateTime.Now;
             his.UnAllocatedTime = DateTime.Now.TimeOfDay;
-          
             bookingSlot.VehicleNumber = null;
             bookingSlot.AllocatedDate = null;
             bookingSlot.AllocatedTime = null;
-
             db.History.Add(his);
             db.SaveChanges();
             return RedirectToAction("AllSlots");
-          
+
         }
 
         protected override void Dispose(bool disposing)
