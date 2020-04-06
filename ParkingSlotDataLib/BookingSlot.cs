@@ -11,13 +11,16 @@ namespace ParkingSlotDataLib
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BookingSlot
     {
         public int Id { get; set; }
+        [Required]
         public string VehicleNumber { get; set; }
         public Nullable<System.DateTime> AllocatedDate { get; set; }
         public Nullable<System.TimeSpan> AllocatedTime { get; set; }
+        [Required]
         public string VehicleType { get; set; }
         public Nullable<int> SlotNo { get; set; }
     }

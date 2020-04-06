@@ -29,12 +29,6 @@ namespace ParkingMgmt.Controllers
         }
 
 
-        public ActionResult SlotAvaiabilty()
-        {
-            // ParkingSlotEntities db = new ParkingSlotEntities();
-            ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
-            return View();
-        }
 
         public ActionResult ParkingHistory()
         {
@@ -43,8 +37,15 @@ namespace ParkingMgmt.Controllers
         }
 
         [HttpGet]
-        public ActionResult availableslots()
+        public ActionResult SlotAvaiabilty()
         {
+            // ParkingSlotEntities db = new ParkingSlotEntities();
+            ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult availableslots()  {
 
             string VT = Request.QueryString["VehicleType"];
             if (VT =="" || VT==null)
@@ -90,6 +91,11 @@ namespace ParkingMgmt.Controllers
                     return View(db.BookingSlots.Where(x => x.VehicleNumber == null).ToList());
                 }
                 
+            }
+            else
+            {
+                ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
+                return View();
             }
 
             return View();
@@ -149,7 +155,8 @@ namespace ParkingMgmt.Controllers
             }
             else
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
+                return View();
             }
             return RedirectToAction("HomePage");
         }

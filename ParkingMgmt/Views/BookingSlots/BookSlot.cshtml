@@ -22,7 +22,7 @@
         @Html.LabelFor(model => model.VehicleType, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
               <h4>@Html.DropDownList("VehicleType", new SelectList(ViewBag.DropDown), "Select Vehicle Type", null)</h4>
-            @Html.ValidationMessageFor(model => model.VehicleNumber, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.VehicleType, "", new { @class = "text-danger" })
         </div>
     </div>
 
