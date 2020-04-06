@@ -41,6 +41,7 @@ namespace ParkingMgmt.Controllers
         {
             // ParkingSlotEntities db = new ParkingSlotEntities();
             ViewBag.DropDown = db.BookingSlots.Select(u => u.VehicleType).Distinct().ToList();
+            ViewBag.error = TempData["temp"];
             return View();
         }
 
@@ -50,7 +51,10 @@ namespace ParkingMgmt.Controllers
             string VT = Request.QueryString["VehicleType"];
             if (VT =="" || VT==null)
             {
-                ViewBag.error = "Please select Vehicle Type";
+                //ViewBag.error = "Please select Vehicle Type";
+
+                TempData["temp"] = "Please select Vehicle Type";
+                TempData.Keep();
                 return RedirectToAction("SlotAvaiabilty");
             }
             else if (VT == "Large")
